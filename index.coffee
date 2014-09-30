@@ -25,13 +25,21 @@ class LYAMLFilter extends Filter
 
     throw new Error "No benderContext passed into LYAMLFilter options" unless @benderContext?
 
-  processString: (str, relativePath, srcPath) ->
+  processFile = (srcDir, destDir, relativePath) ->
+    string = fs.readFileSync srcDir + '/' + relativePath, { encoding: 'utf8' }
+
+    output = @processString string, relativePath, srcDir
+    outputPath = @getDestFilePath relativePath
+
+    fs.writeFileSync destDir + '/' + outputPath, output, { encoding: 'utf8' }
+
+  processString: (str, relativePath, srcDir) ->
     [projectName, version] = utils.extractProjectAndVersionFromPath(relativePath)
 
     language = @_extractLanguageFromPath relativePath
 
     yamlObject = yaml.safeLoad str,
-      filename: "#{srcPath}/#{relativePath}"
+      filename: "#{srcDir}/#{relativePath}"
 
     result =
       translations: yamlObject
