@@ -20,6 +20,8 @@ class LYAMLFilter extends Filter
     if !(this instanceof LYAMLFilter)
       return new LYAMLFilter(inputTree, options)
 
+    super
+
     { @benderContext } = @options
     @allLocalesCacheFor = {}
 
