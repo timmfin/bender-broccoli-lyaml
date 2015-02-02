@@ -7,7 +7,7 @@ glob = require("glob")
 utils = require('bender-broccoli-utils')
 
 
-LOCALE_REGEX = /^[a-z]{2}(?:-[A-Z]{2})?$/
+LOCALE_REGEX = /^[A-Za-z]{2}(?:-[A-Za-z]{2})?$/
 
 
 class LYAMLFilter extends Filter
@@ -81,9 +81,9 @@ class LYAMLFilter extends Filter
     basename = path.basename(filepath, ".lyaml")
 
     if LOCALE_REGEX.test basename
-      basename
+      basename.toLowerCase()
     else
-      throw new Error "Couldn't extract language from filename: #{filepath}"
+      throw new Error "Couldn't extract language from filename: #{filepath} (basename: #{basename})"
 
   _isTopLevelLangFile: (filepath) ->
     dirPart = path.dirname filepath
