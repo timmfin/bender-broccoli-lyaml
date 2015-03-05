@@ -4,8 +4,6 @@ path = require('path')
 fs = require('fs')
 glob = require("glob")
 
-utils = require('bender-broccoli-utils')
-
 
 LOCALE_REGEX = /^[A-Za-z]{2}(?:-[A-Za-z]{2})?$/
 
@@ -36,7 +34,7 @@ class LYAMLFilter extends Filter
     fs.writeFileSync destDir + '/' + outputPath, output, { encoding: 'utf8' }
 
   processString: (str, relativePath, srcDir) ->
-    [projectName, version] = utils.extractProjectAndVersionFromPath(relativePath)
+    [projectName, version] = @benderContext.extractProjectAndVersionFromPath(relativePath)
 
     language = @_extractLanguageFromPath relativePath
 
