@@ -7,7 +7,7 @@
     "url": "https://github.com/HubSpot/bender-broccoli-lyaml"
   },
   "dependencies": {
-    "bender-broccoli-utils": "git://github.com/timmfin/bender-broccoli-utils.git",
+    "bender-broccoli-utils": "timmfin/bender-broccoli-utils",
     "broccoli-filter": "^0.1.11",
     "glob": "^4.0.6",
     "js-yaml": "^3.2.2"
