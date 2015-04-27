@@ -11,5 +11,15 @@
     "broccoli-filter": "^0.1.11",
     "glob": "^4.0.6",
     "js-yaml": "^3.2.2"
+  },
+  "scripts": {
+    "build": "./compile-coffeescript.sh",
+    "watch": "./watch-coffeescript.sh",
+    "clean": "./clean.sh",
+    "prepublish": "./compile-coffeescript.sh",
+    "postinstall": "./run-prepublish-if-not-already-run.sh"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.2"
   }
 }
