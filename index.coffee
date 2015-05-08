@@ -4,6 +4,8 @@ path = require('path')
 fs = require('fs')
 glob = require("glob")
 
+{ discoverAllLocalesIn } = require('./utils')
+
 
 LOCALE_REGEX = /^[A-Za-z]{2}(?:-[A-Za-z]{2})?$/
 
@@ -96,27 +98,11 @@ class LYAMLFilter extends Filter
     if @allLocalesCacheFor[projectName]?[version]?
       return @allLocalesCacheFor[projectName][version]
 
-    if @benderContext.isServedProject projectName
-      projOrDep = @benderContext.getProject projectName
-    else
-      projOrDep = @benderContext.getDependency projectName, version
+    localesAvailable = discoverAllLocalesIn(projectName, version, @benderContext)
+    localesAvailable = ['en'] unless localesAvailable?.length > 0
 
-    fullDirPath = path.join projOrDep.path, 'lang/'
-    subPath = path.join projectName, version, 'lang', '*.lyaml'
-    fullPath = path.join fullDirPath, '*.lyaml'
-
-    # Only discover locales if the <project>/<version>/lang/ folder exists
-    if fs.existsSync fullDirPath
-      localeStringFilesAvailable = glob.sync(fullPath).map (filename) ->
-        path.basename(filename, '.lyaml')
-
-      console.log "Discovering all locale strings available from #{subPath}: #{localeStringFilesAvailable}"
-
-      # Look up all the *.lyaml files in the <proj>/static/lang directory
-      @allLocalesCacheFor[projectName] ?= {}
-      @allLocalesCacheFor[projectName][version] = localeStringFilesAvailable
-    else
-      ['en']
+    @allLocalesCacheFor[projectName] ?= {}
+    @allLocalesCacheFor[projectName][version] = localesAvailable
 
 
 
