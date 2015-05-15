@@ -80,6 +80,14 @@ class LYAMLFilter extends Filter
     #{extraTopLevelTranslationInfo}
     """
 
+
+  cleanup: ->
+    # This shouldn't be necessary, but looks like there is a bug with broccoli-filters's
+    # pre 0.1.14 support
+    this.needsCleanup = true
+
+    super()
+
   _extractLanguageFromPath: (filepath) ->
     basename = path.basename(filepath, ".lyaml")
 
