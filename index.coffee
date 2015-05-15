@@ -80,6 +80,8 @@ class LYAMLFilter extends Filter
     #{extraTopLevelTranslationInfo}
     """
 
+  getDestFilePath: (relativePath) ->
+    super if not @options.includePattern? or @options.includePattern.test(relativePath)
 
   cleanup: ->
     # This shouldn't be necessary, but looks like there is a bug with broccoli-filters's
