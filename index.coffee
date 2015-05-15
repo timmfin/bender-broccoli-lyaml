@@ -16,6 +16,9 @@ class LYAMLFilter extends Filter
   extensions: ['lyaml']
   targetExtension: 'js'
 
+  # Save the cache to disk
+  cacheByContent: true
+
   constructor: (@inputTree, @options = {}) ->
     if !(this instanceof LYAMLFilter)
       return new LYAMLFilter(inputTree, options)
