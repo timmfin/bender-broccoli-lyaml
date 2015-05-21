@@ -9,7 +9,7 @@
   "dependencies": {
     "bender-broccoli-lyaml": "timmfin/bender-broccoli-lyaml",
     "bender-broccoli-utils": "timmfin/bender-broccoli-utils",
-    "broccoli-filter": "timmfin/broccoli-filter#broccoli-persistent-filter",
+    "broccoli-filter": "timmfin/broccoli-filter#broccoli-persistent-filter-with-symlinked-dirs",
     "glob": "^4.0.6",
     "js-yaml": "^3.2.2"
   },
