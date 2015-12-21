@@ -39,7 +39,7 @@ class LYAMLFilter extends Filter
     fs.writeFileSync destDir + '/' + outputPath, output, { encoding: 'utf8' }
 
   processString: (str, relativePath, srcDir) ->
-    [projectName, version] = @benderContext.extractProjectAndVersionFromPath(relativePath)
+    [projectName, version] = @benderContext.extractProjectNameAndVersionFromPath(relativePath)
 
     language = @_extractLanguageFromPath relativePath
 
