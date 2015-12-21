@@ -4,10 +4,7 @@ path = require('path')
 
 
 discoverAllLocalesIn = (projectName, version, benderContext) ->
-  if benderContext.isServedProject projectName
-    projOrDep = benderContext.getProject projectName
-  else
-    projOrDep = benderContext.getDependency projectName, version
+  projOrDep = benderContext.getProjectOrDependency(projectName)
 
   fullDirPath = path.join projOrDep.path, 'lang/'
   subPath = path.join projectName, version, 'lang', '*.lyaml'
